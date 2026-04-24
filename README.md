@@ -1,6 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: NALINIPRIYA G </h3>
-<h3>Register Number/Staff Id: TSIT031</h3>
+<h3>Name: VISMAYA.V </h3>
+<h3>Register Number:212224060310
 
 
 <h3>AIM:</h3>
@@ -40,3 +40,65 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+
+## Program:
+```
+import random
+
+class MedicinePrescribingAgent:
+
+    def __init__(self):
+        self.performance = 0
+        self.rooms = ["Room1", "Room2"]
+        self.current_room = random.choice(self.rooms)  # Agent starts in a random room
+
+    def sense_environment(self):
+        # Randomly generate temperature between 97 and 102°F
+        temperature = round(random.uniform(97, 102), 1)
+        return temperature
+
+    def prescribe_medicine(self, temperature):
+        if temperature > 98.5:  # Identify unhealthy patient
+            print(f"Patient in {self.current_room} has fever ({temperature}°F). Prescribing medicine.")
+            self.performance += 10   # reward for treatment
+        else:
+            print(f"Patient in {self.current_room} is healthy ({temperature}°F). No medicine required.")
+
+    def move_to_other_room(self):
+        other_room = [room for room in self.rooms if room != self.current_room][0]
+        print(f"Moving from {self.current_room} to {other_room}.")
+        self.current_room = other_room
+        self.performance -= 1  # movement cost
+
+    def run_agent(self, cycles=5):
+        for _ in range(cycles):
+            # Sense the patient's temperature
+            temp = self.sense_environment()
+
+            # Prescribe medicine if needed
+            self.prescribe_medicine(temp)
+
+            # Move to next room
+            self.move_to_other_room()
+
+            print(f"Current Performance: {self.performance}\n")
+
+
+# Run the agent
+agent = MedicinePrescribingAgent()
+agent.run_agent(cycles=6)
+print("Final Performance Score:", agent.performance)
+
+
+```
+## Output:
+<img width="1892" height="885" alt="image" src="https://github.com/user-attachments/assets/da09656a-e772-4792-b044-b4c83e28fd95" />
+
+
+
+
+## Result:
+
+PEAS description for the given AI problem and develop an AI agent was observed successfully.
+
+
